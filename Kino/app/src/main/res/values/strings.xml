@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Kino</string>
+    <string name="item_news">Новости</string>
+    <string name="item_AllNew">Все новинки</string>
+    <string name="item_NowInTheCinema">Сейчас в кино</string>
+    <string name="item_prices">Цены на билеты</string>
 </resources>
