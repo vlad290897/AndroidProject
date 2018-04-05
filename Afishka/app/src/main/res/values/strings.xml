@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">A-фишка</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="item_news">Новости</string>
+    <string name="item_AllNew">Все новинки</string>
+    <string name="item_NowInTheCinema">Сейчас в кино</string>
+    <string name="item_prices">Цены на билеты</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="cansel">Отмена</string>
+    <string name="Registration">Зарегестрироваться</string>
+    <string name="Password">Пароль</string>
+    <string name="e_mail">E-mail адрес</string>
+    <string name="Surname">Фамилия</string>
+    <string name="Name">Имя</string>
+    <string name="action_settings">Настройки</string>
+</resources>

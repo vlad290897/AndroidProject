@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/registration_background"
+    android:paddingLeft="20dp"
+
+    >
+
+
+    <EditText
+        android:id="@+id/ET_name"
+        android:inputType="text"
+        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Name"
+        android:textColor="#000000"
+        android:layout_marginLeft="170dp"
+        android:textColorHint="#565555"
+        android:background="@null"
+        />
+    <EditText
+        android:id="@+id/ET_surname"
+        android:inputType="text"
+        android:layout_marginTop="20dp"
+        android:textColor="#0d0d0d"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Surname"
+        android:textColorHint="#565555"
+        android:layout_marginLeft="170dp"
+        android:background="@null"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="120dp"
+            android:visibility="invisible"
+
+            />
+        <EditText
+            android:id="@+id/editText_email"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/e_mail"
+            android:inputType="textEmailAddress"
+
+            android:textColor="#060606"
+            android:textColorHint="#565555"
+            android:background="@null"
+            />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:textColor="#000000"
+        android:layout_marginLeft="170dp"
+        android:textColorHint="#565555"
+        android:background="@null"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="130dp"
+        android:layout_gravity="">
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Отмена"
+            android:textColor="#fff"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/btn_cancel"/>
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/Registration"
+            android:textColor="#fff"
+            android:background="@drawable/button_selector"/>
+    </LinearLayout>
+
+</LinearLayout>
