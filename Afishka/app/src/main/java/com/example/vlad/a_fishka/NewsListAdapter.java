@@ -67,18 +67,18 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
     }
 
     @Override
-    public void onBindViewHolder(NewsViewHolder personViewHolder, int i) {
-        Picasso.with(personViewHolder.mContext)
+    public void onBindViewHolder(NewsViewHolder newsViewHolder, int i) {
+        Picasso.with(newsViewHolder.mContext)
                 .load(imgList.get(i))
-                .into(personViewHolder.mTitleImage);
+                .into(newsViewHolder.mTitleImage);
 
-        personViewHolder.mTitle.setText(titleList.get(i));
-        personViewHolder.mContentText.setText(contentList.get(i));
-        personViewHolder.mDateText.setText(dateList.get(i));
+        newsViewHolder.mTitle.setText(titleList.get(i));
+        newsViewHolder.mContentText.setText(contentList.get(i));
+        newsViewHolder.mDateText.setText(dateList.get(i));
 
         if (i == titleList.size() - 1) {
 
-            Toast toast = Toast.makeText(personViewHolder.mContext,
+            Toast toast = Toast.makeText(newsViewHolder.mContext,
                     "Конец списка", Toast.LENGTH_SHORT);
             toast.show();
         }

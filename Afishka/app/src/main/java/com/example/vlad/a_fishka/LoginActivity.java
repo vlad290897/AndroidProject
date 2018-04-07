@@ -19,6 +19,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import static com.example.vlad.a_fishka.RegisterActivity.isOnline;
+
 
 /**
  * Created by Vlad on 07.03.2018.
@@ -30,7 +32,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     ProgressDialog pd;
     Button mSignIn;
     Button mSignUp;
-    ProgressBar progressBar;
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
 
-        progressBar = findViewById(R.id.progressbar);
+
 
         mSignIn = findViewById(R.id.signIn);
         mSignIn.setOnClickListener(this);
@@ -72,11 +74,19 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         String password = editTextPassword.getText().toString();
         switch(view.getId()){
             case R.id.signIn:
+                if ( !isOnline(this) ) {
+                    Toast.makeText(getApplicationContext(),
+                            "Нет соединения с интернетом!", Toast.LENGTH_LONG).show();
+                    return;
+
+                }
+
                 if(email.isEmpty())
                     editTextEmail.setError("Вы не ввели E-mail !");
+                else
                 if(password.isEmpty()&& !email.isEmpty())
                     editTextPassword.setError("Вы не ввели пароль !");
-                if(!email.isEmpty() && !password.isEmpty())
+                else
                     signIn(email,password);
                 break;
 
@@ -90,7 +100,6 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     public void signIn(String email,String password){
-        progressBar.setVisibility(ProgressBar.VISIBLE);
 
         mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -98,11 +107,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 if(task.isSuccessful()) {
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
-                    progressBar.setVisibility(ProgressBar.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Авторизация прошла успешно", Toast.LENGTH_LONG).show();
                 } else {Toast toast = Toast.makeText(LoginActivity.this,"Неверное имя пользователя или пароль!",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show(); progressBar.setVisibility(ProgressBar.INVISIBLE); }
+                     }
             }
         });
     }

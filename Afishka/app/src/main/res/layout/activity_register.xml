@@ -72,27 +72,16 @@
         android:textColorHint="#565555"
         android:background="@null"
         />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="130dp"
-        android:layout_gravity="">
+
+
         <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Отмена"
-            android:textColor="#fff"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/btn_cancel"/>
-        <Button
+            android:layout_marginTop="150dp"
             android:id="@+id/btn_register"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/Registration"
             android:textColor="#fff"
             android:background="@drawable/button_selector"/>
-    </LinearLayout>
+
 
 </LinearLayout>
