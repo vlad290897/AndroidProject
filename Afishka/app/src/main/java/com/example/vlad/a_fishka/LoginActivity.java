@@ -29,7 +29,6 @@ import static com.example.vlad.a_fishka.RegisterActivity.isOnline;
 public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText editTextEmail;
     private EditText editTextPassword;
-    ProgressDialog pd;
     Button mSignIn;
     Button mSignUp;
 
@@ -40,6 +39,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         editTextEmail = findViewById(R.id.login);
         editTextPassword = findViewById(R.id.password);
+
 
         mAuth = FirebaseAuth.getInstance();
 

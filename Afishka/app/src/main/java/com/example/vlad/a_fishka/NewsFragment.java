@@ -58,14 +58,10 @@ public class NewsFragment extends Fragment {
 
             Document doc;
             try {
-
-                doc = Jsoup.connect("https://www.film.ru/news").get();
+for(int i = 0 ; i<3;i++){
+                doc = Jsoup.connect("https://www.film.ru/news?page="+i + "#acon").get();
                 Elements text = doc.select(".news_title");
-                Elements imgTags = doc.select(".item");
-                titleList.clear();
-                contentList.clear();
-                imgList.clear();
-                dateList.clear();
+
 
                 Elements elements = doc.getElementsByAttributeValue("class", "pr cb");
                 for (Element e: elements) {
@@ -82,6 +78,7 @@ public class NewsFragment extends Fragment {
                 for(Element d : date){
                     dateList.add(d.text());
                 }
+}
 
             } catch (IOException e) {
                 e.printStackTrace();
