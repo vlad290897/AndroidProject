@@ -28,7 +28,6 @@ import java.util.ArrayList;
 
 public class NewsFragment extends Fragment {
 
-    // то в чем будем хранить данные пока не передадим адаптеру
     public ArrayList<String> titleList = new ArrayList<String>();
     public ArrayList<String> imgList = new ArrayList<String>();
     public ArrayList<String> contentList = new ArrayList<String>();
@@ -63,14 +62,15 @@ public class NewsFragment extends Fragment {
             try {
 
                 doc = Jsoup.connect("https://www.film.ru/news").get();
-                Elements text = doc.select(".news_title");
-                Elements imgTags = doc.select(".item");
+
                 titleList.clear();
                 contentList.clear();
                 imgList.clear();
                 dateList.clear();
 
+                Elements text = doc.select(".news_title");
                 Elements elements = doc.getElementsByAttributeValue("class", "pr cb");
+
                 for (Element e: elements) {
                     imgList.add(e.select("img").attr("abs:src"));
                 }

@@ -80,7 +80,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
         if (i == titleList.size() - 1) {
 
             Toast toast = Toast.makeText(newsViewHolder.mContext,
-                    "Конец списка", Toast.LENGTH_SHORT);
+                    "Конец списка(тут будет догрузка данных)", Toast.LENGTH_LONG);
             toast.show();
         }
 
