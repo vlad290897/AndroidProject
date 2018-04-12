@@ -87,14 +87,6 @@ public class NewsFragment extends Fragment {
             return null;
         }
 
-        public void parse() {
-            Document doc = (Document) Jsoup.connect("https://www.film.ru/news");
-            Elements els = doc.getElementsByAttributeValue("class", "news_title");
-            for (Element myEl : els) {
-                String str = myEl.text();
-                Log.d("myDev", str);
-            }
-        }
 
         @Override
         protected void onPostExecute(String result) {
