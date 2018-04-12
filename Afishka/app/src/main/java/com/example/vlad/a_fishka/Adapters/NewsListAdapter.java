@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.vlad.a_fishka.Model.News;
 import com.example.vlad.a_fishka.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vlad on 02.04.2018.
@@ -33,26 +33,21 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
         NewsViewHolder(View itemView) {
             super(itemView);
-            mTitleImage =(ImageView)itemView.findViewById(R.id.imageNews);
+            mTitleImage =itemView.findViewById(R.id.imageNews);
 
-            mTitle = (TextView)itemView.findViewById(R.id.txtname);
+            mTitle = itemView.findViewById(R.id.txtname);
             mContentText = itemView.findViewById(R.id.contentText);
             mDateText = itemView.findViewById(R.id.dateNews);
             mContext = itemView.getContext();
         }
     }
 
-    private ArrayList<String> titleList;
-    private ArrayList<String> imgList;
-    private ArrayList<String> contentList;
-    private ArrayList<String> dateList;
+    private List<News> newsList;
 
 
-    public NewsListAdapter( ArrayList<String> titleList, ArrayList<String> imgList,ArrayList<String> contentList,ArrayList<String> dateList){
-        this.titleList = titleList;
-        this.imgList = imgList;
-        this.contentList = contentList;
-        this.dateList = dateList;
+
+    public NewsListAdapter( List<News> newsList){
+        this.newsList = newsList;
     }
 
     @Override
@@ -69,25 +64,25 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.NewsVi
 
     @Override
     public void onBindViewHolder(NewsViewHolder newsViewHolder, int i) {
+        News news = newsList.get(i);
         Picasso.with(newsViewHolder.mContext)
-                .load(imgList.get(i))
+                .load(news.getImageUrl())
                 .into(newsViewHolder.mTitleImage);
 
-        newsViewHolder.mTitle.setText(titleList.get(i));
-        newsViewHolder.mContentText.setText(contentList.get(i));
-        newsViewHolder.mDateText.setText(dateList.get(i));
+        newsViewHolder.mTitle.setText(news.getTitle());
+        newsViewHolder.mContentText.setText(news.getContent());
+        newsViewHolder.mDateText.setText(news.getDate());
 
-        if (i == titleList.size() - 1) {
-
-            Toast toast = Toast.makeText(newsViewHolder.mContext,
-                    "Конец списка(тут будет догрузка данных)", Toast.LENGTH_LONG);
-            toast.show();
-        }
+//        if (i == titleList.size() - 1) {
+//            Toast toast = Toast.makeText(newsViewHolder.mContext,
+//                    "Конец списка(Тут будет догрузка статей)", Toast.LENGTH_LONG);
+//            toast.show();
+//        }
 
     }
 
     @Override
     public int getItemCount() {
-        return titleList.size();
+        return newsList.size();
     }
 }

@@ -1,7 +1,6 @@
 package com.example.vlad.a_fishka.Activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +26,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText editTextEmail;
     private EditText editTextPassword;
-    ProgressDialog pd;
     Button mSignIn;
     Button mSignUp;
 
@@ -38,6 +36,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         editTextEmail = findViewById(R.id.login);
         editTextPassword = findViewById(R.id.password);
+
 
         mAuth = FirebaseAuth.getInstance();
 

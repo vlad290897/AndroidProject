@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.example.vlad.a_fishka.Adapters.NewsListAdapter;
+import com.example.vlad.a_fishka.Model.News;
 import com.example.vlad.a_fishka.R;
 
 import org.jsoup.Jsoup;
@@ -21,31 +23,26 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Vlad on 02.04.2018.
- */
 
 public class NewsFragment extends Fragment {
 
-    public ArrayList<String> titleList = new ArrayList<String>();
-    public ArrayList<String> imgList = new ArrayList<String>();
-    public ArrayList<String> contentList = new ArrayList<String>();
-    public ArrayList<String> dateList = new ArrayList<String>();
+
+    public List<News> newsList = new ArrayList<>();
+
     RecyclerView recyclerView;
     ProgressBar loader;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.news_list,container,false);
-        recyclerView =(RecyclerView) view.findViewById(R.id.listrecycler);
+        View view = inflater.inflate(R.layout.news_list, container, false);
+        recyclerView = view.findViewById(R.id.listrecycler);
 
-        // textView =view.findViewById(R.id.txtname);
 
         loader = view.findViewById(R.id.loader);
-//        RVAdapter listAdapter = new RVAdapter();
-//        recyclerView.setAdapter(listAdapter);
+
         new NewThread().execute();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -54,6 +51,7 @@ public class NewsFragment extends Fragment {
 
     public class NewThread extends AsyncTask<String, Void, String> {
 
+
         @Override
         protected String doInBackground(String... arg) {
 
@@ -61,42 +59,47 @@ public class NewsFragment extends Fragment {
             Document doc;
             try {
 
+
                 doc = Jsoup.connect("https://www.film.ru/news").get();
 
-                titleList.clear();
-                contentList.clear();
-                imgList.clear();
-                dateList.clear();
 
-                Elements text = doc.select(".news_title");
                 Elements elements = doc.getElementsByAttributeValue("class", "pr cb");
+                Elements titles = doc.select(".news_title");
+                Elements dates = doc.getElementsByAttributeValue("class", "date mt30");
 
-                for (Element e: elements) {
-                    imgList.add(e.select("img").attr("abs:src"));
-                }
-                for(Element title : text){
-                    titleList.add(title.text());
-                }
-                for(Element content:elements){
-                    contentList.add(content.text());
+
+                for (int i = 0; i < elements.size(); i++) {
+                    Element e = elements.get(i);
+                    String url = e.select("img").attr("abs:src");
+                    String title = titles.get(i).text();
+                    String content = e.select("div[class=pr cb]").text();
+                    String date = dates.get(i).text();
+                    newsList.add(new News(title, content, url, date));
                 }
 
-                Elements date = doc.getElementsByAttributeValue("class","date mt30");
-                for(Element d : date){
-                    dateList.add(d.text());
-                }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+
             // ничего не возвращаем потому что я так захотел)
             return null;
+        }
+
+        public void parse() {
+            Document doc = (Document) Jsoup.connect("https://www.film.ru/news");
+            Elements els = doc.getElementsByAttributeValue("class", "news_title");
+            for (Element myEl : els) {
+                String str = myEl.text();
+                Log.d("myDev", str);
+            }
         }
 
         @Override
         protected void onPostExecute(String result) {
             loader.setVisibility(ProgressBar.INVISIBLE);
-            NewsListAdapter adapter = new NewsListAdapter(titleList,imgList,contentList,dateList);
+            NewsListAdapter adapter = new NewsListAdapter(newsList);
             recyclerView.setAdapter(adapter);
         }
     }

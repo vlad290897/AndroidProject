@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     startActivity(intent);
                     Toast.makeText(RegisterActivity.this,"Регистрация успешна",Toast.LENGTH_LONG).show();
                 }else {
-                    Toast.makeText(RegisterActivity.this,"Регистрация провалена",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this,"email зарегестрирован или вы ввели некорректный email",Toast.LENGTH_LONG).show();
                     progressBar.setVisibility(ProgressBar.INVISIBLE);
                 }
             }
@@ -124,7 +124,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             editTextEmail.setError("Введите E-mail !");
         }else
         if(password.isEmpty()){
-            editTextPassword.setError("Введите пароль");
-        }else signUp(email,password,name,surname);
+            editTextPassword.setError("Введите пароль !");
+        }
+        else if(editTextPassword.length()<6)
+            editTextPassword.setError("Не менее 6 символов !");
+        else signUp(email,password,name,surname);
     }
 }
