@@ -107,6 +107,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(LoginActivity.this, "Авторизация прошла успешно", Toast.LENGTH_LONG).show();
                 } else {Toast toast = Toast.makeText(LoginActivity.this,"Неверное имя пользователя или пароль!",Toast.LENGTH_LONG);
                     toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
                      }
             }
         });
